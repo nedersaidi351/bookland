@@ -308,16 +308,6 @@ docker-compose down -v
 4. Les réponses sont renvoyées au frontend pour mise à jour de l'UI
 5. Le chat utilise WebSocket pour une communication bidirectionnelle
 
-## 🤝 Contribution
-
-Les contributions sont les bienvenues ! Pour contribuer :
-
-1. Forkez le projet
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/NouvelleFonctionnalite`)
-3. Commitez vos changements (`git commit -m 'Ajout de NouvelleFonctionnalite'`)
-4. Pushez vers la branche (`git push origin feature/NouvelleFonctionnalite`)
-5. Ouvrez une Pull Request
-
 ---
 
 

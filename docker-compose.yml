@@ -1,0 +1,102 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: bookland-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: jwt_security
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./Backend/uploads:/app/uploads
+    ports:
+      - "5432:5432"
+    networks:
+      - bookland-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # pgAdmin for Database Management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: bookland-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@bookland.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - bookland-network
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Spring Boot Backend
+  backend:
+    build:
+      context: ./Backend/PFE
+      dockerfile: Dockerfile
+    container_name: bookland-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/jwt_security
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - bookland-network
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./Backend/uploads:/app/uploads
+
+  # Bookland Frontend (Enhanced with glassmorphism)
+  frontend-bookland:
+    build:
+      context: ./front/bookland
+      dockerfile: Dockerfile
+    container_name: bookland-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - bookland-network
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+  # PFE Frontend - Temporarily disabled (source code missing)
+  # frontend-pfe:
+  #   build:
+  #     context: ./front/PFE
+  #     dockerfile: Dockerfile
+  #   container_name: pfe-frontend
+  #   ports:
+  #     - "3001:80"
+  #   networks:
+  #     - bookland-network
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - backend
+
+networks:
+  bookland-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pgadmin_data:

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTohome()" style="cursor: pointer;">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+              <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomarket()" style="cursor: pointer;">
+                <i class="bi bi-shop"></i>
+              </div>
+            </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomessage()" style="cursor: pointer;">
+                <i class="bi bi-chat"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomission()" style="cursor: pointer;">
+                <i class="bi bi-journal-text"></i>
+              </div>
+            </div>
+        </li>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li >
+            <!-- notification-bell.component.html -->
+<div class="notification-bell-container">
+  <div class="bell-icon" (click)="toggleNotifications()">
+    <span class="icon">🔔</span>
+    <span *ngIf="unreadCount > 0" class="badge">{{unreadCount}}</span>
+  </div>
+
+  <div class="notification-dropdown" *ngIf="showNotifications">
+    <div class="dropdown-header">
+      <h3 style="color: black;">Notifications</h3>
+      <button class="close-btn" (click)="showNotifications = false">×</button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading notifications...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="notification-list">
+      <div *ngFor="let notification of notifications" 
+           class="notification-item"
+           [class.unread]="!notification.isRead"
+           (click)="viewNotification(notification)">
+        
+        <div class="notification-content">
+          <p class="notification-text">{{notification.content}}</p>
+          <span class="notification-time">{{notification.createdAt | date:'shortTime'}}</span>
+        </div>
+        <button *ngIf="!notification.isRead" 
+                class="mark-read-btn"
+                (click)="markAsRead(notification.id); $event.stopPropagation()">
+          ✓
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="notifications.length === 0 && !isLoading" class="empty-state">
+      <p>No new notifications</p>
+    </div>
+
+    
+  </div>
+</div>
+
+          </li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+               <button (click)="toggleDropdown()" class="dropbtn">
+                <!-- Show user image if available, otherwise show default -->
+                <img [src]="imageUrl || 'assets/img/default-profile.jpg'" 
+                     alt="Profile" 
+                     class="dropdown-icon"
+                     (error)="handleImageError()">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/profile" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="mission" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="message" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+  <div class="sections-container">
+
+    <section class="hero2"> 
+      <div class="container3">
+        <a href="mission"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+        <a href="message" ><fa-icon [icon]="facom"></fa-icon>Message</a>
+        <a href="market" ><fa-icon [icon]="famarket"></fa-icon>Market ‎ ‎ </a>
+        
+        <a href="book" ><fa-icon [icon]="fabook"></fa-icon>My Book</a>
+
+
+
+
+      </div>
+      </section>
+
+
+<!-- /Hero Section -->
+<section id="hero" class="hero section dark-background">
+  <div class="container">
+    <!-- Post Creation Area - Now Sticky -->
+    <div class="create-post-container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body">
+              <h5 class="mb-3 text-primary fw-bold">Create a Post</h5>
+              <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+                <div class="mb-3">
+                  <textarea 
+                    class="form-control border-0 bg-light p-3 rounded-3"
+                    id="content"
+                    placeholder="What's on your mind?"
+                    rows="4"
+                    formControlName="content">
+                  </textarea>
+                  <div *ngIf="postForm.get('content')?.invalid && postForm.get('content')?.touched" class="text-danger mt-2">
+                    Content is required
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-primary rounded-pill px-4" id="post" [disabled]="postForm.invalid">Post</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Feed - Scrollable Content -->
+    <div class="posts-feed">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h3 class="mb-4 text-dark fw-bold">Recent Posts</h3>
+          
+          <div *ngFor="let post of posts" class="card mb-4 shadow-sm border-0 rounded-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-2">
+                <div class="me-3">
+               <img
+      *ngIf="post.userImageBase64"
+      [src]="'data:image/jpeg;base64,' + post.userImageBase64"
+      alt="User"
+      class="profile-image"
+    />
+
+                </div>
+                <div>
+                  <h3 class="mb-0 fw-semibold" style="color: black;">{{ post.authorName }}</h3>
+                  <small class="text-muted">{{ post.createdAt | date:'short' }}</small>
+                </div>
+              </div>
+              <p class="card-text text-dark mt-2">{{ post.content }}</p>
+              <div class="card-footer">
+                <button 
+                  class="like-button"
+                  [disabled]="post.likedByCurrentUser"
+                  (click)="likePost(post)"
+                  [class.liked]="post.likedByCurrentUser">
+                  <span class="icon">👍</span>
+                  <span class="text">Like</span>
+                  <span class="count">{{ post.likeCount || 0 }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+
+
+
+  </div>
+</section>
+
+ 
+</div>
+
+
+
+
+
+
+   
+
+
+<!-- Floating chat bubble -->
+<div class="chat-bubble" (click)="toggleChat()" *ngIf="!isChatOpen">
+  <svg width="24" height="24" viewBox="0 0 24 24">
+    <path fill="white" d="M12 3c5.5 0 10 3.6 10 8s-4.5 8-10 8c-1.2 0-2.4-.2-3.4-.6l-3.1 1.5.8-2.9c-1-1.1-1.6-2.5-1.6-4C2 6.6 6.5 3 12 3zm0-2C5.4 1 0 5.1 0 10c0 1.6.5 3.1 1.3 4.4L0 21l6.6-3.2c1.1.5 2.3.7 3.4.7 6.6 0 12-4.1 12-9s-5.4-9-12-9z"/>
+  </svg>
+</div>
+
+<!-- Chat container -->
+<div class="messenger-container" [class.open]="isChatOpen" *ngIf="isChatOpen">
+  <div class="chat-header">
+    <div class="header-content">
+      <img src="assets/img/chat.webp" class="chat-profile-pic" alt="Chat Assistant">
+      <div class="chat-header-info">
+        <div class="chat-title">Chat Assistant</div>
+        <div class="chat-status">Online</div> <!-- This now has the green dot -->
+      </div>
+    </div>
+    <button class="close-chat" (click)="toggleChat()">×</button>
+  </div>
+
+  <div class="message-area">
+    <!-- Your messages will appear here -->
+    <div *ngFor="let message of messages" class="message-wrapper" 
+         [class.user-wrapper]="message.sender === 'user'"
+         [class.bot-wrapper]="message.sender === 'bot'">
+      <img *ngIf="message.sender === 'bot'" src="assets/img/chat.webp" class="bot-avatar" alt="Bot">
+      <div class="message-bubble" 
+           [class.user-bubble]="message.sender === 'user'"
+           [class.bot-bubble]="message.sender === 'bot'">
+        {{message.text}}
+        <div class="message-meta">
+          <span class="timestamp">{{message.timestamp | date:'h:mm a'}}</span>
+          <span *ngIf="message.sender === 'user'" class="status-icons">
+            <span *ngIf="message.status === 'sent'">✓</span>
+            <span *ngIf="message.status === 'delivered'">✓✓</span>
+            <span *ngIf="message.status === 'read'" style="color: #4fc3f7">✓✓</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="typing-indicator">
+      <div class="typing-dots">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-area">
+      <input [(ngModel)]="newMessage" 
+             placeholder="Type a message..."
+             (keyup.enter)="sendMessage()"
+             [disabled]="isLoading">
+      <button (click)="sendMessage()" [disabled]="!newMessage.trim() || isLoading">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path [attr.fill]="newMessage.trim() ? '#0084ff' : '#ccc'" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+  
+
+  <!-- Scroll Top -->
+ 
+  <!-- Preloader -->
+ 
+
+
+</body>
+
+</html>

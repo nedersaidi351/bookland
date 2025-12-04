@@ -1,0 +1,97 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"class="active"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<div class="main-content">
+
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Posts Management</h1>
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li>Posts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="data-card">
+      <div class="table-header">
+        <h3>All Posts</h3>
+        <div class="table-actions">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search posts...">
+          </div>
+          <select>
+            <option>Sort by Newest</option>
+            <option>Sort by Oldest</option>
+            <option>Most Liked</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="posts-container">
+        <div *ngFor="let post of posts; let i = index" class="post-card" [style.animation-delay]="(i * 0.1) + 's'">
+          <div class="post-header">
+            <div class="user-cell">
+              <img
+                *ngIf="post.userImageBase64"
+                [src]="'data:image/jpeg;base64,' + post.userImageBase64"
+                alt="User"
+                class="profile-image"
+              />
+              <div class="user-info">
+                <span class="user-name">{{ post.authorName }}</span>
+                <span class="user-email">{{ post.createdAt | date:'MMM d, yyyy - h:mm a' }}</span>
+              </div>
+            </div>
+            <button class="action-btn delete" (click)="deletePost(post)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+
+          <div class="post-content">
+            <p>{{ post.content }}</p>
+          </div>
+
+          <div class="post-footer">
+            <div class="engagement">
+              <div class="engagement-item">
+                <fa-icon [icon]="faHeart"></fa-icon>
+                <span>{{ post.likeCount || 0 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

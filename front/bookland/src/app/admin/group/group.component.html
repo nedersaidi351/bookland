@@ -1,0 +1,109 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+   <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"class="active"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>User Management</h1>
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li>Books</li>
+        </ul>
+       </div>
+       
+        </div>
+
+
+<!-- group-chat.component.html -->
+<div class="chat-management-container">
+  <div class="chat-header">
+    <div class="header-content">
+      <h2><fa-icon [icon]="fauser"></fa-icon> Group Chat Manager</h2>
+      <button class="clear-all-btn" (click)="confirmClearAll()">
+        <fa-icon [icon]="faTrashAlt"></fa-icon> Clear All
+      </button>
+    </div>
+    <div class="search-container">
+      <div class="search-bar">
+        <fa-icon [icon]="faSearch"></fa-icon>
+        <input type="text" [(ngModel)]="searchText" placeholder="Search messages..." 
+               (input)="filterMessages()">
+      </div>
+      <div class="stats">
+        <span class="stat-badge">
+          <fa-icon [icon]="faMessage"></fa-icon> {{messages.length}} messages
+        </span>
+        <span class="stat-badge" *ngIf="filteredMessages.length !== messages.length">
+          <fa-icon [icon]="faFilter"></fa-icon> {{filteredMessages.length}} filtered
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-app">
+    <div class="messages-container">
+      <div class="messages">
+        <div *ngFor="let msg of filteredMessages" class="message-card" [class.current-user]="msg.sender === currentUser">
+          <div class="message-header">
+            <div class="user-info">
+              <div class="avatar" [style.background-color]="getUserColor(msg.sender)">
+                {{ msg.sender | slice:0:1 | uppercase }}
+              </div>
+              <div class="user-details">
+                <span class="username">{{ msg.sender }}</span>
+                <span class="timestamp">{{ msg.timestamp | date: 'shortTime' }}</span>
+              </div>
+            </div>
+            <button class="delete-btn" (click)="confirmDelete(msg.id)" matTooltip="Delete message">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </div>
+          <div class="message-body">
+            {{ msg.content }}
+          </div>
+        </div>
+
+        <div *ngIf="filteredMessages.length === 0" class="empty-state">
+          <fa-icon [icon]="faCommentSlash" class="empty-icon"></fa-icon>
+          <h3>No messages found</h3>
+          <p *ngIf="searchText">Try adjusting your search query</p>
+          <p *ngIf="!searchText">The chat is currently empty</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

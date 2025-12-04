@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTohome()" style="cursor: pointer;">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+              <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomarket()" style="cursor: pointer;">
+                <i class="bi bi-shop"></i>
+              </div>
+            </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomessage()" style="cursor: pointer;">
+                <i class="bi bi-chat"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomission()" style="cursor: pointer;">
+                <i class="bi bi-journal-text"></i>
+              </div>
+            </div>
+        </li>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li ></li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+               <button (click)="toggleDropdown()" class="dropbtn">
+                <!-- Show user image if available, otherwise show default -->
+                <img [src]="imageUrl || 'assets/img/default-profile.jpg'" 
+                     alt="Profile" 
+                     class="dropdown-icon"
+                     (error)="handleImageError()">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/profile" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="mission" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="message" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+
+  <section id="hero" class="hero section dark-background">
+    <div class="container">
+      <div class="task-dashboard">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+          <div class="dashboard-title">
+            <h1 style="color: black;text-align: center;padding-bottom: 30px;">📋 My Missions</h1>
+           
+          </div>
+          
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-icon completed">
+                <i class="bi bi-check2-all"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-number">{{completedTasksCount}}</span>
+                <span class="stat-label">Completed</span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon pending">
+                <i class="bi bi-hourglass"></i>
+              </div>
+              <div class="stat-content">
+                <span class="stat-number">{{pendingTasksCount}}</span>
+                <span class="stat-label">Pending</span>
+              </div>
+            </div>
+            
+            <div class="stat-card">
+              <div class="stat-icon achievements">
+                <i class="bi bi-trophy"></i>
+              </div>
+             <div class="stat-content">
+  <span class="stat-number">{{achievements?.length || 0}}</span>
+  <span class="stat-label">Achievements</span>
+</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Achievement Progress -->
+       <div class="achievement-progress-container">
+  <div class="progress-tier">
+    <div class="tier-icon-container">
+      <img [src]="getTierImage(achievementProgress.currentTier)" 
+           [alt]="achievementProgress.currentTier + ' Trophy'" 
+           class="tier-icon">
+    </div>
+    <div class="tier-info">
+      <div class="tier-name">{{achievementProgress.currentTier}} Tier</div>
+      <div class="tier-next">Next: {{achievementProgress.nextTier}} at {{achievementProgress.nextMilestone}} tasks</div>
+    </div>
+  </div>
+
+          
+          <div class="progress-tracker">
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="achievementProgress.progressPercent"></div>
+            </div>
+            <div class="progress-text">
+              {{completedTasksCount}}/{{achievementProgress.nextMilestone}} tasks
+            </div>
+          </div>
+          
+          <div class="milestone-markers">
+            <div class="marker" [class.reached]="completedTasksCount >= 3">3</div>
+            <div class="marker" [class.reached]="completedTasksCount >= 6">6</div>
+            <div class="marker" [class.reached]="completedTasksCount >= 9">9</div>
+            <div class="marker" [class.reached]="completedTasksCount >= 12">12</div>
+            <div class="marker" [class.reached]="completedTasksCount >= 15">15</div>
+          </div>
+        </div>
+
+        <!-- Task Groups -->
+       <div class="task-groups-container">
+  <div *ngFor="let group of groupedTodos | keyvalue" class="task-group-card">
+    <div class="group-header">
+      <div class="group-info">
+        <div class="group-icon" [style.backgroundColor]="getGroupColor(group.key)">
+          {{ group.key ? group.key.charAt(0) : 'U' }}
+        </div>
+        <div class="group-text">
+          <h3>{{ group.key || 'Ungrouped' }}</h3>
+          <div class="completion-bar-container">
+            <div class="completion-bar">
+              <div class="completion-fill" 
+                   [style.width]="(getCompletedCount(group.value) / group.value.length * 100) + '%'"
+                   [style.backgroundColor]="getGroupColor(group.key)">
+              </div>
+            </div>
+            <span class="completion-text">
+              {{ getCompletedCount(group.value) }}/{{ group.value.length }} completed
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="task-list">
+      <div *ngFor="let todo of group.value" class="task-item" [class.completed]="todo.completed">
+        <div class="task-checkbox">
+          <label class="checkbox-container">
+            <input
+              type="checkbox"
+              [checked]="todo.completed"
+              (change)="updateCompletionStatus(todo)"
+              [disabled]="todo.completed"
+            />
+            <span class="checkmark">
+              <span *ngIf="isSaving[todo.id!]" class="spinner"></span>
+            </span>
+          </label>
+        </div>
+        
+        <div class="task-content">
+          <div class="task-title">{{ todo.title }}</div>
+          <div class="task-description">{{ todo.description }}</div>
+        </div>
+        
+        <div class="task-meta">
+          <span class="task-status" [class.completed]="todo.completed">
+            {{ todo.completed ? 'Completed' : 'In Progress' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+            
+            <!-- Group Achievement Indicator -->
+            <div *ngIf="getCompletedCount(group.value) >= 3" class="group-achievement">
+              <img [src]="getTierImage(achievementProgress.currentTier)" 
+                 [alt]="achievementProgress.currentTier + ' Trophy'" 
+                 class="tier-icon">
+              <span>Group Master Unlocked!</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievement Toast -->
+  <div *ngIf="showAchievementToast && newAchievement" class="achievement-toast">
+    <div class="toast-icon">
+      <img [src]="getTierImage(newAchievement.name)" 
+           [alt]="newAchievement.name + ' Trophy'" 
+           class="trophy-icon">
+    </div>
+    <div class="toast-content">
+      <h3 style="color: black;">Achievement Unlocked!</h3>
+      <p class="achievement-name">{{ newAchievement.name }}</p>
+      <p class="achievement-desc">{{ newAchievement.description }}</p>
+    </div>
+    <button class="toast-close" (click)="showAchievementToast = false">
+      <i class="bi bi-x"></i>
+    </button>
+  </div>
+
+</body>
+</html>

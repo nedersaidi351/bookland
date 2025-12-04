@@ -1,0 +1,166 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+  <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"class="active"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+      <div class="user-profile">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Add New Book</h1>
+        <div class="breadcrumb">
+          <a routerLink="/book-list">Books</a> / <span>Add</span>
+        </div>
+      </div>
+      <button class="btn btn-outline" routerLink="/book-list">
+        <fa-icon [icon]="faArrowLeft"></fa-icon> Back to Books
+      </button>
+    </div>
+
+     <div class="add-book-form">
+      <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Title:</label>
+          <input type="text" formControlName="title">
+          <div *ngIf="bookForm.get('title')?.invalid && (bookForm.get('title')?.dirty || bookForm.get('title')?.touched)"
+               class="validation-error">
+            <div *ngIf="bookForm.get('title')?.errors?.['required']">Title is required</div>
+            <div *ngIf="bookForm.get('title')?.errors?.['minlength']">Title must be at least 3 characters</div>
+            <div *ngIf="bookForm.get('title')?.errors?.['maxlength']">Title cannot exceed 100 characters</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Author:</label>
+          <input type="text" formControlName="author">
+          <div *ngIf="bookForm.get('author')?.invalid && (bookForm.get('author')?.dirty || bookForm.get('author')?.touched)"
+               class="validation-error">
+            <div *ngIf="bookForm.get('author')?.errors?.['required']">Author is required</div>
+            <div *ngIf="bookForm.get('author')?.errors?.['minlength']">Author name must be at least 3 characters</div>
+            <div *ngIf="bookForm.get('author')?.errors?.['maxlength']">Author name cannot exceed 50 characters</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Description:</label>
+          <textarea formControlName="description"></textarea>
+          <div *ngIf="bookForm.get('description')?.invalid && (bookForm.get('description')?.dirty || bookForm.get('description')?.touched)"
+               class="validation-error">
+            <div *ngIf="bookForm.get('description')?.errors?.['maxlength']">Description cannot exceed 1000 characters</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Price:</label>
+          <input type="number" formControlName="price" min="0.01" step="0.01">
+          <div *ngIf="bookForm.get('price')?.invalid && (bookForm.get('price')?.dirty || bookForm.get('price')?.touched)"
+               class="validation-error">
+            <div *ngIf="bookForm.get('price')?.errors?.['required']">Price is required</div>
+            <div *ngIf="bookForm.get('price')?.errors?.['min']">Price must be at least $0.01</div>
+            <div *ngIf="bookForm.get('price')?.errors?.['max']">Price cannot exceed $9999.99</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>ISBN:</label>
+          <input type="text" formControlName="isbn">
+          <div *ngIf="bookForm.get('isbn')?.invalid && (bookForm.get('isbn')?.dirty || bookForm.get('isbn')?.touched)"
+               class="validation-error">
+            <div *ngIf="bookForm.get('isbn')?.errors?.['required']">ISBN is required</div>
+            <div *ngIf="bookForm.get('isbn')?.errors?.['pattern']">Please enter a valid ISBN (6 or 8 digits)</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Add New Genre:</label>
+          <div class="input-group">
+            <input 
+              type="text" 
+              class="form-control" 
+              [(ngModel)]="newGenre" 
+              name="newGenre"  
+              placeholder="Enter genre name"
+              [ngModelOptions]="{standalone: true}">
+            <button type="button" class="btn btn-primary" (click)="addNewGenre()">Add</button>
+          </div>
+          <div *ngIf="genreAddMessage" class="text-success mt-1">{{ genreAddMessage }}</div>
+          <div *ngIf="genreAddError" class="text-danger mt-1">{{ genreAddError }}</div>
+        </div>
+
+        <!-- Existing Genre Checkboxes -->
+        <div class="form-group mt-3">
+          <label>Genres:</label>
+          <div class="genre-checkboxes">
+            <div *ngFor="let genre of availableGenres" class="genre-checkbox">
+              <input 
+                type="checkbox" 
+                [id]="'genre-' + genre" 
+                [value]="genre" 
+                (change)="toggleGenre(genre)"
+                [checked]="selectedGenres.includes(genre)">
+              <label [for]="'genre-' + genre">{{ genre }}</label>
+            </div>
+          </div>
+          <div *ngIf="bookForm.get('genres')?.invalid && (bookForm.get('genres')?.dirty || bookForm.get('genres')?.touched)"
+               class="validation-error">
+            <div *ngIf="bookForm.get('genres')?.errors?.['required']">At least one genre must be selected</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Cover Image:</label>
+          <input type="file" (change)="onCoverImageChange($event)" accept="image/*" required>
+          <div *ngIf="!coverImage && formSubmitted" class="validation-error">Cover image is required</div>
+          <div *ngIf="coverImage && coverImage.size > 2097152" class="validation-error">
+            Image must be less than 2MB
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>PDF File:</label>
+          <input type="file" (change)="onPdfFileChange($event)" accept=".pdf" required>
+          <div *ngIf="!pdfFile && formSubmitted" class="validation-error">PDF file is required</div>
+          <div *ngIf="pdfFile && pdfFile.size > 10485760" class="validation-error">
+            PDF must be less than 10MB
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-btn" [disabled]="bookForm.invalid">Add Book</button>
+      </form>
+      
+      <div *ngIf="successMessage" class="success-message">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </div>
+</div>

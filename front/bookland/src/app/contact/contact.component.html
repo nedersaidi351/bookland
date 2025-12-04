@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="/acceuil" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <i class="bi bi-shop"></i>
+            </div>
+          </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateToStopwatch()" style="cursor: pointer;">
+                <i class="bi bi-stopwatch"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <i class="bi bi-journal-text"></i>
+            </div>
+          </div>
+        </li>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li ></li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+              <button (click)="toggleDropdown()" class="dropbtn">
+                <img src="../../assets/img/FIRas.jpg" alt="Menu" class="dropdown-icon">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/login" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="faset"></fa-icon>Settings</a>
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+  <div class="sections-container">
+
+    <section class="hero2"> 
+      <div class="container3">
+        <a href="#"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+        <a href="message" ><fa-icon [icon]="facom"></fa-icon>Message</a>
+        <a href="#" ><fa-icon [icon]="famarket"></fa-icon>Market ‎ ‎ </a>
+        <a href="timer" ><fa-icon [icon]="faclock"></fa-icon>Chronos</a>
+        <a href="#" ><fa-icon [icon]="fabook"></fa-icon>My Book</a>
+
+
+
+
+      </div>
+      </section>
+
+
+<!-- /Hero Section -->
+<section id="hero" class="hero section dark-background">  
+  <div class="container">
+    Here's a long text for you—a detailed essay on the impact of technology on modern society. Enjoy!  
+
+---  
+
+### **The Impact of Technology on Modern Society**  
+
+Technology has become an inseparable part of human life, revolutionizing the way we communicate, work, learn, and entertain ourselves. From the invention of the wheel to the rise of artificial intelligence, technological advancements have continuously shaped human civilization. In the 21st century, the pace of innovation has accelerated exponentially, bringing both opportunities and challenges to society.  
+
+#### **1. Communication and Connectivity**  
+The advent of the internet and smartphones has transformed communication, making it instantaneous and borderless. Social media platforms like Facebook, Twitter, and Instagram have redefined human interaction, allowing people to connect across continents in real time. While this has fostered global collaboration and cultural exchange, it has also raised concerns about privacy, misinformation, and mental health. The constant exposure to digital interactions has led to issues like social media addiction and cyberbullying, highlighting the need for responsible usage.  
+
+#### **2. The Workplace Revolution**  
+Automation, artificial intelligence, and remote work technologies have drastically altered the job market. Many repetitive tasks are now handled by machines, increasing efficiency but also displacing certain jobs. The rise of the gig economy, fueled by platforms like Uber and Fiverr, has created flexible employment opportunities but also led to job insecurity for many workers. Additionally, remote work, accelerated by the COVID-19 pandemic, has proven that many jobs can be done from home, changing traditional office dynamics forever.  
+
+#### **3. Education and E-Learning**  
+Technology has democratized education, making knowledge accessible to millions through online courses, digital libraries, and virtual classrooms. Platforms like Coursera, Khan Academy, and YouTube tutorials provide free or affordable learning resources, breaking geographical and financial barriers. However, the digital divide remains a challenge, as not everyone has equal access to high-speed internet or modern devices. Moreover, excessive screen time and reduced face-to-face interactions in education may impact students' social skills.  
+
+#### **4. Healthcare Advancements**  
+Medical technology has made groundbreaking progress, from robotic surgeries to telemedicine. Wearable devices like smartwatches monitor health metrics in real time, enabling preventive care. AI-powered diagnostics can detect diseases like cancer at early stages, improving survival rates. However, the high cost of advanced treatments and ethical concerns around genetic engineering (e.g., CRISPR) pose significant dilemmas for society.  
+
+#### **5. Entertainment and Media Consumption**  
+Streaming services like Netflix, Spotify, and YouTube have revolutionized entertainment, offering on-demand content. Video games have evolved into immersive experiences with virtual and augmented reality. While this provides endless entertainment options, it also raises concerns about screen addiction, decreased physical activity, and the impact of violent or addictive content on young minds.  
+
+#### **6. Environmental Impact**  
+Technology has contributed to environmental degradation (e-waste, energy consumption) but also offers solutions like renewable energy, smart grids, and electric vehicles. The challenge lies in balancing technological progress with sustainability to combat climate change effectively.  
+
+#### **7. The Future: AI and Ethics**  
+Artificial intelligence is poised to redefine every aspect of life, from self-driving cars to AI-generated art. However, ethical concerns—such as job displacement, bias in algorithms, and the potential misuse of AI—require careful regulation and global cooperation.  
+
+### **Conclusion**  
+Technology is a double-edged sword, offering immense benefits while presenting new challenges. Society must navigate this digital age wisely, ensuring that technological progress aligns with human well-being, equity, and sustainability. The future will depend on how we harness innovation responsibly, making technology a force for good rather than a source of division.  
+
+---  
+
+Would you like a text on a different topic or with a specific focus? Let me know!
+
+
+### **The Impact of Technology on Modern Society**  
+
+Technology has become an inseparable part of human life, revolutionizing the way we communicate, work, learn, and entertain ourselves. From the invention of the wheel to the rise of artificial intelligence, technological advancements have continuously shaped human civilization. In the 21st century, the pace of innovation has accelerated exponentially, bringing both opportunities and challenges to society.  
+
+#### **1. Communication and Connectivity**  
+The advent of the internet and smartphones has transformed communication, making it instantaneous and borderless. Social media platforms like Facebook, Twitter, and Instagram have redefined human interaction, allowing people to connect across continents in real time. While this has fostered global collaboration and cultural exchange, it has also raised concerns about privacy, misinformation, and mental health. The constant exposure to digital interactions has led to issues like social media addiction and cyberbullying, highlighting the need for responsible usage.  
+
+#### **2. The Workplace Revolution**  
+Automation, artificial intelligence, and remote work technologies have drastically altered the job market. Many repetitive tasks are now handled by machines, increasing efficiency but also displacing certain jobs. The rise of the gig economy, fueled by platforms like Uber and Fiverr, has created flexible employment opportunities but also led to job insecurity for many workers. Additionally, remote work, accelerated by the COVID-19 pandemic, has proven that many jobs can be done from home, changing traditional office dynamics forever.  
+
+#### **3. Education and E-Learning**  
+Technology has democratized education, making knowledge accessible to millions through online courses, digital libraries, and virtual classrooms. Platforms like Coursera, Khan Academy, and YouTube tutorials provide free or affordable learning resources, breaking geographical and financial barriers. However, the digital divide remains a challenge, as not everyone has equal access to high-speed internet or modern devices. Moreover, excessive screen time and reduced face-to-face interactions in education may impact students' social skills.  
+
+#### **4. Healthcare Advancements**  
+Medical technology has made groundbreaking progress, from robotic surgeries to telemedicine. Wearable devices like smartwatches monitor health metrics in real time, enabling preventive care. AI-powered diagnostics can detect diseases like cancer at early stages, improving survival rates. However, the high cost of advanced treatments and ethical concerns around genetic engineering (e.g., CRISPR) pose significant dilemmas for society.  
+
+#### **5. Entertainment and Media Consumption**  
+Streaming services like Netflix, Spotify, and YouTube have revolutionized entertainment, offering on-demand content. Video games have evolved into immersive experiences with virtual and augmented reality. While this provides endless entertainment options, it also raises concerns about screen addiction, decreased physical activity, and the impact of violent or addictive content on young minds.  
+
+#### **6. Environmental Impact**  
+Technology has contributed to environmental degradation (e-waste, energy consumption) but also offers solutions like renewable energy, smart grids, and electric vehicles. The challenge lies in balancing technological progress with sustainability to combat climate change effectively.  
+
+#### **7. The Future: AI and Ethics**  
+Artificial intelligence is poised to redefine every aspect of life, from self-driving cars to AI-generated art. However, ethical concerns—such as job displacement, bias in algorithms, and the potential misuse of AI—require careful regulation and global cooperation.  
+
+  </div>
+  </section>
+ 
+</div>
+
+
+
+
+
+
+   
+
+
+
+  
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+ 
+
+
+</body>
+
+</html>

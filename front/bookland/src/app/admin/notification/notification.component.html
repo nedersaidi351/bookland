@@ -1,0 +1,155 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+   <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"class="active"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>User Management</h1>
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li>Books</li>
+        </ul>
+       </div>
+       
+        </div>
+
+        <div class="notification-header">
+        <div class="header-content">
+      <div class="title-wrapper">
+        <i class="fas fa-bell icon-large"></i>
+        <h2>Send Notifications</h2>
+      </div>
+      <div class="selected-count" *ngIf="selectedUsers.size > 0">
+        <span class="badge">{{selectedUsers.size}} selected</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- User Selection Table -->
+  <div class="modern-card">
+    <div class="card-header">
+      <h3>Select Recipients</h3>
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search users..." (input)="filterUsers($event)">
+      </div>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th width="50px">
+              <label class="checkbox-container">
+                <input type="checkbox" 
+                      (change)="toggleSelectAll($event)" 
+                      [checked]="selectedUsers.size === filteredUsers.length && filteredUsers.length > 0">
+                <span class="checkmark"></span>
+              </label>
+            </th>
+            <th>User</th>
+            <th>Email</th>
+            <th>MFA Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers" [class.selected]="selectedUsers.has(user.id)">
+            <td>
+              <label class="checkbox-container">
+                <input type="checkbox" 
+                      [checked]="selectedUsers.has(user.id)"
+                      (change)="toggleUserSelection(user)">
+                <span class="checkmark"></span>
+              </label>
+            </td>
+            <td>
+              <div class="user-cell">
+                <img [src]="user.imageUrl || 'assets/default-avatar.png'" alt="User" class="user-avatar">
+                <div class="user-info">
+                  <span class="user-name">{{ user.firstname }} {{ user.lastname }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="user-email">{{ user.email }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="{
+                'active': user.mfaEnabled,
+                'inactive': !user.mfaEnabled
+              }">
+                {{ user.mfaEnabled ? 'Enabled' : 'Disabled' }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Notification Form -->
+  <div class="modern-card message-card" *ngIf="selectedUsers.size > 0">
+    <div class="card-header">
+      <h3>Compose Message</h3>
+    </div>
+    
+    <form (ngSubmit)="sendBulkNotifications()" class="notification-form">
+      <div class="form-group floating-label">
+        <textarea 
+          id="notificationContent" 
+          [(ngModel)]="content" 
+          name="notificationContent"
+          placeholder=" "
+          rows="5"
+          required
+        ></textarea>
+        <label for="notificationContent">Notification Message</label>
+        <div class="character-count">{{content.length}}/500</div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" (click)="clearSelection()">
+          <i class="fas fa-times"></i> Clear Selection
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!content || isSending">
+          <i class="fas fa-paper-plane"></i> 
+          {{ isSending ? 'Sending...' : ('Send to ' + selectedUsers.size + ' Users') }}
+        </button>
+      </div>
+    </form>
+  </div>
+    </div>
+
+  </div>

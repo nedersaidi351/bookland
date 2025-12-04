@@ -1,0 +1,119 @@
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+    <li><a routerLink="/users" class="active"><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li>  
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>User Management</h1>
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li>Users</li>
+        </ul>
+      </div>
+      <div class="page-actions">
+
+        <button class="btn btn-primary" routerLink="/users/new">
+          <i class="fas fa-plus"></i> Add New
+        </button>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="data-card">
+      <div class="table-header">
+        <h3>All Users</h3>
+        <div class="table-actions">
+          
+        
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Email</th>
+            <!-- Optional: Hardcoded or dynamic -->
+            <th>Status</th> <!-- Optional: Status logic -->
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>
+              <div class="user-cell">
+                <img [src]="user.imageUrl || 'assets/img/avatar.svg'" alt="User">
+                <div class="user-info">
+                  <span class="user-name">{{ user.firstname }} {{ user.lastname }}</span>
+                  <span class="user-email">{{ user.email }}</span>
+                </div>
+              </div>
+            </td>
+            <td>{{ user.email }}</td>
+             <!-- Default role -->
+            <td>
+             <span [ngClass]="{
+        'status active': user.mfaEnabled,
+        'status inactive': !user.mfaEnabled
+       }">
+       <fa-icon [icon]="facircle"></fa-icon>
+        {{ user.mfaEnabled ? 'Enabled' : 'Disabled' }}
+       </span>
+
+            </td>
+            <td>
+              <div class="action-buttons">
+                    <button class="action-btn view" [routerLink]="['/users', user.id]">
+                  <fa-icon [icon]="faeyes"></fa-icon>
+                </button>
+                <button class="action-btn edit" [routerLink]="['/users/edit', user.id]">
+                  <fa-icon [icon]="faedit"></fa-icon>
+                </button>
+                <button class="action-btn delete" (click)="deleteUser(user.id!)">
+                  <fa-icon [icon]="fatrash"></fa-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  
+</div>

@@ -1,0 +1,45 @@
+<div class="chat-container">
+  <div class="messages-container">
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message" [class.current-user]="msg.sender === currentUser">
+        <div class="avatar" [style.background-color]="getUserColor(msg.sender)">
+          {{ msg.sender | uppercase }}
+        </div>
+        <div class="message-content">
+          <div class="meta">
+            <strong class="sender">{{ msg.sender }}</strong>
+            <span class="timestamp">{{ msg.timestamp | date: 'shortTime' }}</span>
+          </div>
+          <div class="content">{{ msg.content }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="typingUsers.length > 0" class="typing-indicator">
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      {{ typingUsers.join(', ') }} {{ typingUsers.length > 1 ? 'are' : 'is' }} typing...
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-wrapper">
+      <textarea
+        rows="1"
+        [(ngModel)]="newMessage"
+        (input)="onMessageInput(); adjustTextareaHeight($event)"
+        placeholder="Type your message..."
+        class="message-input"
+      ></textarea>
+      <button class="send-button" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

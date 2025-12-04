@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTohome()" style="cursor: pointer;">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+              <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomarket()" style="cursor: pointer;">
+                <i class="bi bi-shop"></i>
+              </div>
+            </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomessage()" style="cursor: pointer;">
+                <i class="bi bi-chat"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomission()" style="cursor: pointer;">
+                <i class="bi bi-journal-text"></i>
+              </div>
+            </div>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li ></li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+              <button (click)="toggleDropdown()" class="dropbtn">
+                <img src="../../assets/img/FIRas.jpg" alt="Menu" class="dropdown-icon">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/login" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+    <section id="hero" class="hero section dark-background">
+    <div class="container" >
+<!-- If the user is not connected, show the username input page -->
+
+
+<div class="chat-app">
+  <div class="messages-container">
+    <div class="messages">
+      <div *ngFor="let msg of messages" class="message" [class.other-user]="msg.sender !== currentUser">
+        <div class="message-content-wrapper">
+          <div class="avatar" [style.background-color]="getUserColor(msg.sender)">
+            {{ msg.sender |  uppercase }}
+          </div>
+          <div class="message-content">
+            <div class="meta">
+              <span class="sender">{{ msg.sender }}</span>
+              <span class="timestamp">{{ msg.timestamp | date: 'shortTime' }}</span>
+            </div>
+            <div class="content">{{ msg.content }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="typingUsers.length > 0" class="typing-indicator">
+      <div class="wave">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <span>{{ typingUsers.join(', ') }} {{ typingUsers.length > 1 ? 'are' : 'is' }} typing...</span>
+    </div>
+  </div>
+
+  <div class="input-container">
+    <div class="input-wrapper">
+      <div class="input-border">
+        <textarea
+          rows="1"
+          [(ngModel)]="newMessage"
+          (input)="onMessageInput(); adjustTextareaHeight($event)"
+          placeholder="Type your message..."
+          class="message-input"
+        ></textarea>
+      </div>
+      <button class="send-button" (click)="sendMessage()" [disabled]="!newMessage.trim()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+  
+ </div>
+</section>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTohome()" style="cursor: pointer;">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+              <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomarket()" style="cursor: pointer;">
+                <i class="bi bi-shop"></i>
+              </div>
+            </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomessage()" style="cursor: pointer;">
+                <i class="bi bi-chat"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomission()" style="cursor: pointer;">
+                <i class="bi bi-journal-text"></i>
+              </div>
+            </div>
+        </li>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li ></li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+              <button (click)="toggleDropdown()" class="dropbtn">
+                <!-- Show user image if available, otherwise show default -->
+                <img [src]="imageUrl || 'assets/img/default-profile.jpg'" 
+                     alt="Profile" 
+                     class="dropdown-icon"
+                     (error)="handleImageError()">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                <a href="/profile" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+              
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+  <body>
+    
+  
+  <section id="hero" class="hero section dark-background">
+    <div class="container" >
+
+      <div class="profile-container" *ngIf="email">
+        <!-- New Header Design -->
+        <div class="profile-header-card">
+          <div class="header-content">
+              <div class="avatar-section">
+                  <div class="profile-pic-container">
+                      <img *ngIf="imageUrl" [src]="imageUrl" alt="User Image" class="profile-avatar"/>
+                      <div class="upload-controls">
+                          <label for="fileInput" class="upload-btn" title="Change photo">
+                              <fa-icon [icon]="facam"></fa-icon>
+                          </label>
+                          <button class="upload-btn" (click)="uploadImage()" title="Upload" *ngIf="selectedFile" >
+                              <fa-icon [icon]="faup" ></fa-icon>
+                          </button>
+                          <input id="fileInput" class="file-input" type="file" (change)="onFileSelected($event)" accept="image/*">
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="user-info-section">
+                  <h1 class="user-name">{{ firstname }} {{lastname}}</h1>
+                  <div class="user-email">{{email}}</div>
+              </div>
+              <!-- Inside your about-card div, after the info rows -->
+       <div class="info-row">
+  <button class="modern-btn update-profile-btn" (click)="openUpdateModal()">
+  <fa-icon [icon]="faEdit" class="btn-icon"></fa-icon>
+  Update Profile
+</button>
+
+</div>
+          </div>
+      </div>
+      <!-- Update Profile Modal -->
+<div class="modal-overlay" *ngIf="showUpdateModal" (click)="closeUpdateModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="modal-title">Update Your Profile</h3>
+      <button class="close-button" (click)="closeUpdateModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="updateProfile()" #updateForm="ngForm" class="modern-form">
+        <!-- form groups -->
+        <div class="form-group">
+          <label class="input-label" for="firstname">First Name</label>
+          <input class="form-input" id="firstname" name="firstname" [(ngModel)]="updateData.firstname" required />
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="lastname">Last Name</label>
+          <input class="form-input" id="lastname" name="lastname" [(ngModel)]="updateData.lastname" required />
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="password">
+            New Password <span class="hint">(leave blank to keep current)</span>
+          </label>
+          <input class="form-input" type="password" id="password" name="password" [(ngModel)]="updateData.password" />
+        </div>
+        <div class="form-group">
+          <label class="input-label" for="confirmPassword">Confirm Password</label>
+          <input class="form-input" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="updateData.confirmPassword" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="cancel-button" (click)="closeUpdateModal()">Cancel</button>
+          <button type="submit" class="submit-button" [disabled]="!updateForm.valid">
+            Save Changes
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+</div>
+
+
+        <!-- Main Content Area -->
+        <div class="profile-body">
+            <!-- Left Column - About -->
+            <div class="about-column">
+                <div class="about-card">
+                    <h2 class="section-title">
+                        <fa-icon [icon]="fauser" class="title-icon"></fa-icon>
+                        About
+                    </h2>
+                    <div class="info-row">
+                        <fa-icon [icon]="faIdCard" class="info-icon"></fa-icon>
+                        <div class="info-text">
+                            <div class="info-label">First Name</div>
+                            <div class="info-value">{{ firstname }}</div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <fa-icon [icon]="fausers" class="info-icon"></fa-icon>
+                        <div class="info-text">
+                            <div class="info-label">Last Name</div>
+                            <div class="info-value">{{ lastname }}</div>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <fa-icon [icon]="faenv" class="info-icon"></fa-icon>
+                        <div class="info-text">
+                            <div class="info-label">Email</div>
+                            <div class="info-value">{{ email }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Right Column - Achievements & Posts -->
+            <div class="activity-column">
+                <!-- Achievements Section -->
+                <!-- Achievements Section -->
+<div class="achievements-card">
+    <h2 class="section-title">
+        <fa-icon [icon]="fatrophy" class="title-icon"></fa-icon>
+        Achievements
+    </h2>
+    
+    <!-- Progress Bar -->
+   
+    
+    <!-- Achievement Badges -->
+    <div *ngIf="achievements.length === 0" class="no-achievements">
+        <fa-icon [icon]="fatrophy" class="empty-icon"></fa-icon>
+        <p>Complete tasks to earn achievements!</p>
+    </div>
+
+    <div *ngFor="let achievement of achievements" class="achievement-badge">
+        <div class="badge-icon">
+          <img [src]="getTierImage(achievement.achievement?.tier || 'bronze')" alt="Achievement icon">
+        </div>
+        <div class="badge-content">
+            <h3 class="badge-title" style="color: black;">{{achievement.achievement?.name}}</h3>
+            <p class="badge-description" style="color: black;">{{achievement.achievement?.description}}</p>
+           
+        </div>
+    </div>
+</div>
+    
+                <!-- Recent Posts Section -->
+              <!-- User's Posts Section -->
+        <div class="posts-card">
+        <h2 class="section-title">
+          <fa-icon [icon]="faFileAlt" class="title-icon"></fa-icon>
+          My Posts
+        </h2>
+        
+        <div *ngIf="userPosts.length === 0" class="no-posts">
+          <fa-icon [icon]="faPen" class="empty-icon"></fa-icon>
+          <p style="color: black;">You haven't created any posts yet.</p>
+        </div>
+
+       <div *ngFor="let post of userPosts" class="post-card">
+  <div class="post-content">{{post.content}}</div>
+  
+  <div class="post-footer">
+    <!-- Date with calendar icon -->
+    <div class="post-meta">
+      <fa-icon [icon]="faCalendar" class="meta-icon"></fa-icon>
+      <span class="post-date">{{post.createdAt | date:'MMM d, yyyy - h:mm a'}}</span>
+    </div>
+    
+    <!-- Action buttons -->
+    <div class="post-actions">
+      <!-- Like button -->
+      <button class="action-btn like-btn" (click)="likePost(post)" [class.liked]="post.likedByCurrentUser">
+        <fa-icon [icon]="faHeart"></fa-icon>
+        <span class="count">{{post.likeCount || 0}}</span>
+      </button>
+      
+      <!-- Delete button with confirmation -->
+      <button class="action-btn delete-btn" (click)="deletePost(post)" title="Delete post">
+        <fa-icon [icon]="faTrash" id="trash"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>
+      </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+</body>

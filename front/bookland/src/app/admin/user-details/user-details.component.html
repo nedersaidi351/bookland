@@ -1,0 +1,162 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+<li><a routerLink="/users" class="active"><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-wrapper">
+  <div class="page-header">
+    <div class="page-title">
+      <h1>User Details</h1>
+      <div class="breadcrumb">
+        <a routerLink="/users">Users</a> / <span>Details</span>
+      </div>
+    </div>
+    <button class="btn btn-outline" routerLink="/users">
+      <fa-icon [icon]="faArrowLeft"></fa-icon> Back to Users
+    </button>
+  </div>
+
+  <div *ngIf="user; else loading" class="user-profile-container">
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="avatar-container">
+          <img [src]="user.imageUrl || 'assets/img/avatar.svg'" alt="User Image" class="profile-image" />
+          <div class="status-badge" [ngClass]="{'active': user.mfaEnabled, 'inactive': !user.mfaEnabled}">
+            <fa-icon [icon]="facircle"></fa-icon>
+          </div>
+        </div>
+        <h2>{{ user.firstname }} {{ user.lastname }}</h2>
+        <p class="user-email">{{ user.email }}</p>
+      </div>
+
+      <div class="profile-details">
+        <div class="detail-row">
+          <div class="detail-label">
+            <fa-icon [icon]="faenv"></fa-icon>
+            <span>Email</span>
+          </div>
+          <div class="detail-value">{{ user.email }}</div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">
+            <fa-icon [icon]="faShieldAlt"></fa-icon>
+            <span>MFA Status</span>
+          </div>
+          <div class="detail-value">
+            <span class="status-tag" [ngClass]="{'active': user.mfaEnabled, 'inactive': !user.mfaEnabled}">
+              {{ user.mfaEnabled ? 'Enabled' : 'Disabled' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <div class="detail-label">
+            <fa-icon [icon]="faTrophy"></fa-icon>
+            <span>Achievements:</span>
+          </div>
+          <div class="detail-value">{{achievements.length}}</div>
+        </div> 
+        <div class="detail-row">
+  <div class="detail-label">
+    <fa-icon [icon]="fabook"></fa-icon>
+    <span>Books Purchased</span>
+  </div>
+  <div class="detail-value">{{ booksCount }}</div>
+</div>
+      </div>
+     
+
+      
+      <!-- User Posts Section -->
+      
+
+      <!-- User Achievements Section -->
+      <section class="achievements-section">
+ 
+
+  <div *ngIf="achievements.length > 0; else noAchievements">
+    <div class="achievements-grid">
+      <div *ngFor="let achievement of achievements" class="achievement-card" 
+           [ngClass]="achievement.achievement?.tier?.toLowerCase()">
+        <div class="achievement-badge">
+          <img [src]="getTierImage(achievement.achievement?.tier || 'bronze')" 
+               alt="Achievement icon" class="badge-icon">
+          <div class="ribbon" *ngIf="achievement.achievement?.tier === 'GOLD'">★</div>
+        </div>
+        <div class="achievement-content">
+          <h4 class="achievement-title">
+            {{ achievement.achievement?.name || achievement.name }}
+            <span class="tier-tag">{{achievement.achievement?.tier?.toLowerCase()}}</span>
+          </h4>
+          <p class="achievement-description" *ngIf="achievement.description">
+            {{ achievement.description }}
+          </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noAchievements>
+    <div class="empty-state">
+      <fa-icon [icon]="faTrophy" class="empty-icon"></fa-icon>
+      <p>No achievements yet</p>
+      <small>Complete challenges to earn achievements!</small>
+    </div>
+  </ng-template>
+</section>
+    
+   <div class="profile-actions">
+          <button class="btn btn-primary" [routerLink]="['/users/edit', user.id]">
+            <fa-icon [icon]="faedit"></fa-icon> Edit Profile
+          </button>
+          <button class="btn btn-danger" (click)="deleteUser(user.id!)">
+            <fa-icon [icon]="fatrash"></fa-icon> Delete User
+          </button>
+        </div>
+      </div>
+    </div>
+
+   
+
+    <ng-template #loading>
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <p>Loading user details...</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+    

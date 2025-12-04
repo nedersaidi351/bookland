@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTohome()" style="cursor: pointer;">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+              <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomarket()" style="cursor: pointer;">
+                <i class="bi bi-shop"></i>
+              </div>
+            </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomessage()" style="cursor: pointer;">
+                <i class="bi bi-chat"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateTomission()" style="cursor: pointer;">
+                <i class="bi bi-journal-text"></i>
+              </div>
+            </div>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li >
+            <!-- notification-bell.component.html -->
+<div class="notification-bell-container">
+  <div class="bell-icon" (click)="toggleNotifications()">
+    <span class="icon">🔔</span>
+    <span *ngIf="unreadCount > 0" class="badge">{{unreadCount}}</span>
+  </div>
+
+  <div class="notification-dropdown" *ngIf="showNotifications">
+    <div class="dropdown-header">
+      <h3 style="color: black;">Notifications</h3>
+      <button class="close-btn" (click)="showNotifications = false">×</button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading notifications...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="notification-list">
+      <div *ngFor="let notification of notifications" 
+           class="notification-item"
+           [class.unread]="!notification.isRead"
+           (click)="viewNotification(notification)">
+        
+        <div class="notification-content">
+          <p class="notification-text">{{notification.content}}</p>
+          <span class="notification-time">{{notification.createdAt | date:'shortTime'}}</span>
+        </div>
+        <button *ngIf="!notification.isRead" 
+                class="mark-read-btn"
+                (click)="markAsRead(notification.id); $event.stopPropagation()">
+          ✓
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="notifications.length === 0 && !isLoading" class="empty-state">
+      <p>No new notifications</p>
+    </div>
+
+    
+  </div>
+</div>
+
+          </li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+               <button (click)="toggleDropdown()" class="dropbtn">
+                <!-- Show user image if available, otherwise show default -->
+                <img [src]="imageUrl || 'assets/img/default-profile.jpg'" 
+                     alt="Profile" 
+                     class="dropdown-icon"
+                     (error)="handleImageError()">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/profile" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="mission" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="message" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+
+
+ <section id="hero" class="hero section dark-background">
+  <div class="container">
+    <div class="marketplace-container">
+<div class="filter-bar">
+  <div class="search-box">
+    <input type="text" placeholder="Search books..." (input)="filterBooks($event)">
+    <i class="fas fa-search"></i>
+  </div>
+
+  <div class="sort-options">
+    <select (change)="sortBooks($event)">
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+  </div>
+
+  <!-- Genre Filter -->
+<!-- Genre Multi-Select Dropdown -->
+<!-- Toggle Button -->
+<!-- Wrapper container -->
+<div class="genre-filter-wrapper">
+  <button class="dropdown-toggle" (click)="toggleGenreDropdown()">
+    Filter by Genre 
+  </button>
+
+  <div class="genre-dropdown" *ngIf="showGenreDropdown">
+    <label *ngFor="let genre of genres" class="checkbox-label">
+      <input
+        type="checkbox"
+        [value]="genre.name"
+        (change)="onGenreCheckboxChange($event)"
+        [checked]="selectedGenres.includes(genre.name)"
+      />
+      {{ genre.name }}
+    </label>
+
+    <button class="reset-button" (click)="resetGenreFilter()">Reset Filter</button>
+  </div>
+</div>
+
+</div>
+
+
+
+
+ <div class="books-grid">
+  <!-- Loop through paginatedBooks instead of filteredBooks -->
+  <div class="book-card" *ngFor="let book of paginatedBooks">
+    <div class="image-container">
+      <div class="book-badge" *ngIf="book.price > 50">Premium</div>
+      <img [src]="book.coverImageUrl" [alt]="book.title">
+    </div>
+
+    <div class="book-details">
+      <div class="book-header">
+        <h3 class="book-title" style="color: black;">Title: {{ book.title }}</h3>
+        <div class="price-tag">{{ book.price | currency }}</div>
+      </div>
+
+      <div class="book-meta">
+        <div class="meta-item" title="Author of the book">
+          <fa-icon [icon]="fauser"></fa-icon>
+          <span><strong>Author:</strong> {{ book.author }}</span>
+        </div>
+        <div class="meta-item" title="International Standard Book Number">
+          <fa-icon [icon]="fabarc"></fa-icon>
+          <span><strong>ISBN:</strong> {{ book.isbn }}</span>
+        </div>
+        <div class="meta-item" title="Date this book was uploaded">
+          <fa-icon [icon]="facalender"></fa-icon>
+          <span><strong>Uploaded on:</strong> {{ book.uploadDate | date:'mediumDate' }}</span>
+        </div>
+      </div>
+
+      <div class="book-description" *ngIf="book.description">
+        <p style="color: rgb(67, 67, 67);">{{ book.description }}</p>
+        <button class="read-more" *ngIf="book.description.length > 100" (click)="viewDetails(book.id ? book.id : 0)">Read More</button>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button *ngIf="!book.isPurchased" class="buy-button" (click)="openPaymentModal(book)">
+        <fa-icon [icon]="fashop"></fa-icon> Buy Now
+      </button>
+      <button class="details-button" (click)="viewDetails(book.id ? book.id : 0)">
+        <fa-icon [icon]="fainfo"></fa-icon> Details
+      </button>
+    </div>
+
+    <div class="pdf-error-message" *ngIf="errorMessage">
+      <div class="error-content">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ errorMessage }}</span>
+        <button class="retry-btn" (click)="checkPdfLink($event, book)">Retry</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pagination Controls -->
+<div class="pagination-container" *ngIf="filteredBooks.length > 0">
+  <div class="pagination-controls">
+    <button (click)="prevPage()" 
+            [disabled]="!canGoPrev()"
+            class="pagination-btn prev-next"
+            aria-label="Previous page">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+      <span>Previous</span>
+    </button>
+
+    <div class="page-numbers">
+      <button *ngFor="let page of pages"
+              (click)="goToPage(page)"
+              [class.active]="page === currentPage"
+              [disabled]="filteredBooks.length === 0"
+              class="pagination-btn"
+              [attr.aria-label]="'Page ' + page">
+        {{ page }}
+      </button>
+    </div>
+
+    <button (click)="nextPage()" 
+            [disabled]="!canGoNext()"
+            class="pagination-btn prev-next"
+            aria-label="Next page">
+      <span>Next</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="filteredBooks.length === 0 && !loading">
+    <i class="fas fa-book"></i>
+    <h3 style="color: #4c4c4d;">No Books Available</h3>
+    <p style="color: #4c4c4d;">There are currently no books in the marketplace.</p>
+    <button class="upload-btn" (click)="openUploadDialog()">
+      <i class="fas fa-upload"></i> Upload a Book
+    </button>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-spinner" *ngIf="loading">
+    <i class="fas fa-spinner fa-spin"></i>
+    <span>Loading books...</span>
+  </div>
+
+</div>
+
+<!-- Add this payment modal at the bottom of your template -->
+<div class="payment-modal" *ngIf="showPaymentModal">
+  <div class="modal-overlay" (click)="closePaymentModal()"></div>
+  
+  <div class="modal-container">
+    <div class="modal-header">
+      <div class="header-content">
+        <h3 class="modal-title">Complete Your Purchase</h3>
+        <p class="modal-subtitle" style="color: #64748b;margin: 0.25rem 0 0;font-size: 0.875rem;">{{ selectedBook?.title }}</p>
+      </div>
+      <button class="close-button" (click)="closePaymentModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="paymentForm" (ngSubmit)="submitPayment()">
+        <div class="form-section">
+          <h4 class="section-title" >Payment Information</h4>
+          
+          <div class="form-group">
+            <label class="input-label">Name on Card</label>
+            <div class="input-container">
+              <input type="text" formControlName="name" placeholder="John Smith" class="form-input">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div *ngIf="paymentForm.get('name')?.invalid && paymentForm.get('name')?.touched" class="error-message">
+              Please enter the name on your card
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="input-label">Card Number</label>
+            <div class="input-container">
+  <input
+  type="text"
+  formControlName="cardNumber"
+  placeholder="4242 4242 4242 4242"
+  class="form-input"
+  inputmode="numeric"
+  maxlength="19"
+  (input)="formatCardNumber($event)">
+
+
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H21M7 15H8M12 15H13M6 19H18C19.1046 19 20 18.1046 20 17V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V17C4 18.1046 4.89543 19 6 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div *ngIf="paymentForm.get('cardNumber')?.invalid && paymentForm.get('cardNumber')?.touched" class="error-message">
+              Please enter a valid 16-digit card number
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="input-label">Expiry Date</label>
+              <div class="input-container">
+                <input
+  type="text"
+  formControlName="expiry"
+  placeholder="MM/YY"
+  class="form-input"
+  inputmode="numeric"
+  maxlength="5"
+  (input)="formatExpiryDate($event)">
+
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div *ngIf="paymentForm.get('expiry')?.touched && paymentForm.get('expiry')?.errors as errors" class="error-message">
+  <div *ngIf="errors['invalidFormat']">Enter as MM/YY</div>
+  <div *ngIf="errors['invalidMonth']">Month must be 01–12</div>
+  <div *ngIf="errors['expired']">Card has expired</div>
+</div>
+
+
+            </div>
+
+            <div class="form-group">
+              <label class="input-label">CVV</label>
+              <div class="input-container">
+               <input
+  type="text"
+  formControlName="cvv"
+  maxlength="4"
+  placeholder="123"
+  class="form-input"
+  (input)="onCvvInput($event)"
+/>
+
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 16V12M12 8H12.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div *ngIf="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.errors as errors" class="error-message">
+  <div *ngIf="errors['required']">CVV is required</div>
+  <div *ngIf="errors['pattern']">CVV must be 3 or 4 digits</div>
+</div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="order-summary">
+          <h4 class="section-title">Order Summary</h4>
+          
+          <div class="summary-item">
+            <span>Book</span>
+            <span>{{ selectedBook?.title }}</span>
+          </div>
+          
+          <div class="summary-item">
+            <span>Price</span>
+            <span class="price">{{ selectedBook?.price | currency }}</span>
+          </div>
+          
+          <div class="divider"></div>
+          
+          <div class="summary-total">
+            <span>Total</span>
+            <span class="total-price">{{ selectedBook?.price | currency }}</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-button" [disabled]="paymentForm.invalid || purchaseLoading">
+            <span *ngIf="!purchaseLoading">Pay Now</span>
+            <span *ngIf="purchaseLoading" class="button-spinner"></span>
+          </button>
+          <button type="button" class="cancel-button" (click)="closePaymentModal()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Update your buy button in the book card -->
+
+
+<button *ngIf="selectedBook?.isPurchased" 
+        (click)="checkPdfLink($event, selectedBook!)">
+  View PDF
+</button>
+
+
+
+    </div>
+    </section>
+    </body>

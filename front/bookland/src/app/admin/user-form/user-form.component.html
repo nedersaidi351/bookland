@@ -1,0 +1,159 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+  <li><a routerLink="/users" class="active"><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+
+<!-- src/app/components/user-form/user-form.component.html -->
+<div class="form-container">
+  <div class="form-card">
+    <!-- Card Header -->
+    <div class="form-header">
+      <h2 class="form-title">
+        <fa-icon [icon]="fauser" class="mr-2"></fa-icon>
+        {{ isEditMode ? 'Edit User Profile' : 'Create New User' }}
+      </h2>
+      <p class="form-subtitle">{{ isEditMode ? 'Update user details' : 'Add a new user to the system' }}</p>
+    </div>
+
+    <!-- Form Content -->
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-content">
+      <div class="form-grid">
+        <!-- Profile Picture Section -->
+        <div class="avatar-section">
+          <div class="avatar-upload">
+            <div class="avatar-preview" [ngClass]="{'has-image': previewUrl}">
+              <img [src]="previewUrl || 'assets/default-avatar.png'" alt="Profile Preview">
+              <div class="upload-overlay" (click)="fileInput.click()">
+                <fa-icon [icon]="['fas', 'camera']"></fa-icon>
+                <span>Change Photo</span>
+              </div>
+            </div>
+            <input #fileInput type="file" id="image" (change)="onFileSelected($event)" accept="image/*" class="hidden">
+            <small class="upload-hint">JPG, PNG or GIF (Max 2MB)</small>
+          </div>
+        </div>
+
+        <!-- Form Fields Section -->
+        <div class="form-fields">
+          <!-- Name Fields -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <div class="input-with-icon">
+                <fa-icon [icon]="fauser" class="input-icon"></fa-icon>
+                <input type="text" id="firstname" formControlName="firstname" placeholder="Enter first name"
+                  [class.invalid]="userForm.get('firstname')?.invalid && userForm.get('firstname')?.touched">
+              </div>
+              <div *ngIf="userForm.get('firstname')?.invalid && userForm.get('firstname')?.touched" class="error-message">
+                First name is required
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="lastname">Last Name</label>
+              <div class="input-with-icon">
+                <fa-icon [icon]="fauser" class="input-icon"></fa-icon>
+                <input type="text" id="lastname" formControlName="lastname" placeholder="Enter last name"
+                  [class.invalid]="userForm.get('lastname')?.invalid && userForm.get('lastname')?.touched">
+              </div>
+              <div *ngIf="userForm.get('lastname')?.invalid && userForm.get('lastname')?.touched" class="error-message">
+                Last name is required
+              </div>
+            </div>
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <div class="input-with-icon">
+              <fa-icon [icon]="faenvelope" class="input-icon"></fa-icon>
+              <input type="email" id="email" formControlName="email" placeholder="Enter email address"
+                [class.invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+            </div>
+            <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error-message">
+              Valid email is required
+            </div>
+          </div>
+
+          <!-- Password Fields - Always visible -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-with-icon">
+                <fa-icon [icon]="falock" class="input-icon"></fa-icon>
+                <input type="text" id="password" formControlName="password" 
+                  [placeholder]="isEditMode ? 'Leave empty to keep current' : 'Create password'"
+                  [class.invalid]="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+              </div>
+              <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="error-message">
+                {{ isEditMode ? 'Enter new password or leave empty' : 'Password is required (min 8 characters)' }}
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="confpassword">Confirm Password</label>
+              <div class="input-with-icon">
+                <fa-icon [icon]="falock" class="input-icon"></fa-icon>
+                <input type="text" id="confpassword" formControlName="confpassword" 
+                  [placeholder]="isEditMode ? 'Leave empty to keep current' : 'Confirm password'"
+                  [class.invalid]="(userForm.get('confpassword')?.invalid || userForm.hasError('passwordMismatch')) && userForm.get('confpassword')?.touched">
+              </div>
+              <div *ngIf="userForm.get('confpassword')?.invalid && userForm.get('confpassword')?.touched" class="error-message">
+                Please confirm password
+              </div>
+              <div *ngIf="userForm.hasError('passwordMismatch') && userForm.get('confpassword')?.touched" class="error-message">
+                Passwords do not match
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-cancel" (click)="navigateToUserList()">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-submit" [disabled]="userForm.invalid && !isEditMode">
+              {{ isEditMode ? 'Update User' : 'Create User' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

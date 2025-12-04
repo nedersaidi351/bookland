@@ -1,0 +1,111 @@
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+   <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"class="active"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Wrapper -->
+<div class="content-wrapper">
+  <!-- First Table - Templates -->
+  <div class="modern-table-container">
+    <div class="table-header">
+      <h2>Missions</h2>
+      <div class="table-actions">
+        <button class="btn-primary" routerLink="/add-template">
+                <fa-icon [icon]="faplus"></fa-icon>
+        </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Group</th>
+            <th>Description</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+  <tr *ngFor="let template of templates">
+    <td class="font-medium">{{ template.title }}</td>
+    <td>{{ template.groupName }}</td>
+    <td class="text-truncate" [title]="template.description">{{ template.description }}</td>
+    <td class="actions">
+      <button class="action-btn edit" (click)="editTemplate(template.id!)">
+        <fa-icon [icon]="faedit"></fa-icon>
+      </button>
+      <button class="action-btn delete" (click)="deleteTemplate(template.id!)">
+        <fa-icon [icon]="fatrash"></fa-icon>
+      </button>
+    </td>
+  </tr>
+</tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Second Table - Completed Todos -->
+  <div class="modern-table-container">
+    <div class="table-header">
+      <h2>Completed Missions</h2>
+    </div>
+    <div class="table-responsive">
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Group</th>
+            <th>User</th>
+            <th class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of completedTodos">
+            <td class="font-medium">{{ todo.title }}</td>
+            <td class="text-truncate" [title]="todo.description">{{ todo.description }}</td>
+            <td>{{ todo.groupName }}</td>
+            <td>{{ todo.firstName }} {{ todo.lastName }}</td>
+            <td class="actions">
+              <button class="action-btn edit" (click)="editIncompleteTodo(todo.id)">
+                <fa-icon [icon]="faedit"></fa-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

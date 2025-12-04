@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <i class="bi bi-shop"></i>
+            </div>
+          </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" (click)="navigateToStopwatch()" style="cursor: pointer;">
+                <i class="bi bi-stopwatch"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <i class="bi bi-journal-text"></i>
+            </div>
+          </div>
+        </li>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li >
+            <!-- notification-bell.component.html -->
+<div class="notification-bell-container">
+  <div class="bell-icon" (click)="toggleNotifications()">
+    <span class="icon">🔔</span>
+    <span *ngIf="unreadCount > 0" class="badge">{{unreadCount}}</span>
+  </div>
+
+  <div class="notification-dropdown" *ngIf="showNotifications">
+    <div class="dropdown-header">
+      <h3 style="color: black;">Notifications</h3>
+      <button class="close-btn" (click)="showNotifications = false">×</button>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading notifications...</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <div class="notification-list">
+      <div *ngFor="let notification of notifications" 
+           class="notification-item"
+           [class.unread]="!notification.isRead"
+           (click)="viewNotification(notification)">
+        
+        <div class="notification-content">
+          <p class="notification-text">{{notification.content}}</p>
+          <span class="notification-time">{{notification.createdAt | date:'shortTime'}}</span>
+        </div>
+        <button *ngIf="!notification.isRead" 
+                class="mark-read-btn"
+                (click)="markAsRead(notification.id); $event.stopPropagation()">
+          ✓
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="notifications.length === 0 && !isLoading" class="empty-state">
+      <p>No new notifications</p>
+    </div>
+
+    
+  </div>
+</div>
+
+          </li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+               <button (click)="toggleDropdown()" class="dropbtn">
+                <!-- Show user image if available, otherwise show default -->
+                <img [src]="imageUrl || 'assets/img/default-profile.jpg'" 
+                     alt="Profile" 
+                     class="dropdown-icon"
+                     (error)="handleImageError()">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/profile" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="mission" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="message" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="faset"></fa-icon>Settings</a>
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+
+<section id="hero" class="hero section dark-background">
+  <div class="container">
+
+<div class="time-tracker-container">
+  <!-- Header -->
+
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <!-- Countdown Card - Always visible -->
+      <div class="card countdown-card">
+        <div class="card-header">
+          <i class="fas fa-stopwatch"></i>
+          <h3>Time Remaining</h3>
+        </div>
+        <div class="card-body">
+          <div class="countdown-display" [class.active]="isCounting">
+            <div class="time-segment">
+              <div class="time-value">{{countdownHours}}</div>
+              <div class="time-label">Hours</div>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-segment">
+              <div class="time-value">{{countdownMinutes}}</div>
+              <div class="time-label">Minutes</div>
+            </div>
+            <div class="time-separator">:</div>
+            <div class="time-segment">
+              <div class="time-value">{{countdownSeconds}}</div>
+              <div class="time-label">Seconds</div>
+            </div>
+          </div>
+          <div class="countdown-progress">
+            <div class="progress-bar" [style.width]="countdownProgress + '%'"></div>
+          </div>
+          <div class="countdown-status">
+            {{isCounting ? countdown + ' remaining' : 'No active session'}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Schedule Card -->
+      <div class="card schedule-card">
+        <div class="card-header">
+          <i class="far fa-calendar-alt"></i>
+          <h3>Schedule Tracking</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label>Start Time</label>
+            <div class="input-with-icon">
+              <i class="far fa-clock"></i>
+              <input type="datetime-local" [(ngModel)]="scheduledStart" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>End Time</label>
+            <div class="input-with-icon">
+              <i class="far fa-clock"></i>
+              <input type="datetime-local" [(ngModel)]="scheduledEnd" class="form-control" />
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" (click)="scheduleTracking()">
+            <i class="fas fa-play"></i> Start Tracking Session
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <!-- Logs Card -->
+      <div class="card logs-card">
+        <div class="card-header">
+          <div class="logs-header">
+            <i class="fas fa-history"></i>
+            <h3>Time Logs</h3>
+          </div>
+          <div class="logs-controls">
+            <div class="total-duration">
+              <span>Total:</span>
+              <span class="total-value">{{calculateTotalDuration()}}</span>
+            </div>
+            <div class="filter-controls">
+              <input type="date" [(ngModel)]="fromDate" class="form-control" placeholder="From" />
+              <input type="date" [(ngModel)]="toDate" class="form-control" placeholder="To" />
+              <button class="btn btn-icon" (click)="applyDateFilter()" title="Apply Filter">
+                <i class="fas fa-filter"></i>
+              </button>
+              <button class="btn btn-icon" (click)="clearDateFilter()" title="Clear Filter">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="logs-table-container" *ngIf="filteredLogs.length > 0">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th width="10%">#</th>
+                  <th width="30%">Start Time</th>
+                  <th width="30%">End Time</th>
+                  <th width="30%">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let log of filteredLogs; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ log.startTime | date: 'short' }}</td>
+                  <td>
+                    <span class="log-status" [class.in-progress]="!log.endTime">
+                      {{ log.endTime ? (log.endTime | date: 'short') : 'In Progress' }}
+                    </span>
+                  </td>
+                  <td>
+                    <span class="duration-badge">
+                      {{ calculateDuration(log.startTime, log.endTime) }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="empty-state" *ngIf="filteredLogs.length === 0">
+            <i class="far fa-clock"></i>
+            <p>No time logs found</p>
+            <button class="btn btn-outline" (click)="clearDateFilter()">
+              Clear filters
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div></section>
+

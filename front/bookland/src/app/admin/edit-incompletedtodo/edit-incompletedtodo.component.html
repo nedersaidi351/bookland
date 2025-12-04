@@ -1,0 +1,98 @@
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+   <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"class="active"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Edit Mission Template</div>
+    </div>
+    <div class="header-right">
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Edit Form -->
+  <div class="glass-form-container">
+    <form (ngSubmit)="onSubmit()" class="glass-form">
+      <div class="form-header">
+        <div class="form-icon">
+          <fa-icon [icon]="faedit"></fa-icon>
+        </div>
+        <h2>Edit Mission</h2>
+        <p class="form-subtitle">Update the mission details</p>
+      </div>
+
+      <div class="form-body">
+        <div class="input-group floating">
+          <input type="text" 
+                 id="title" 
+                 [(ngModel)]="todo.title" 
+                 name="title" 
+                 class="glass-input"
+                 placeholder=" " 
+                 required>
+          <label for="title">Title <span class="required">*</span></label>
+          <div class="underline"></div>
+        </div>
+
+        <div class="input-group floating">
+          <textarea id="description" 
+                    [(ngModel)]="todo.description" 
+                    name="description" 
+                    class="glass-textarea"
+                    placeholder=" " 
+                    rows="3"></textarea>
+          <label for="description">Description</label>
+          <div class="underline"></div>
+        </div>
+
+        <div class="input-group floating">
+          <input type="text" 
+                 id="groupName" 
+                 [(ngModel)]="todo.groupName" 
+                 name="groupName" 
+                 class="glass-input"
+                 placeholder=" ">
+          <label for="groupName">Group Name</label>
+          <div class="underline"></div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn-glass btn-glass-secondary" (click)="onCancel()">
+          <fa-icon [icon]="fatimes"></fa-icon>  Cancel
+        </button>
+        <button type="submit" class="btn-glass btn-glass-primary">
+          <fa-icon [icon]="fasave"></fa-icon> Save Changes
+        </button>
+      </div>
+
+      <div *ngIf="errorMessage" class="error" style="margin-top: 1rem; color: #f44336;">
+        {{ errorMessage }}
+      </div>
+    </form>
+  </div>
+</div>
+

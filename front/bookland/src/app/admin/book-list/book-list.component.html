@@ -1,0 +1,107 @@
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+  <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"class="active"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+     
+     
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>User Management</h1>
+        <ul class="breadcrumb">
+          <li><a href="#">Home</a></li>
+          <li>Books</li>
+        </ul>
+      </div>
+      <div class="page-actions">
+
+        <button class="btn btn-primary" routerLink="/add-book">
+          <fa-icon [icon]="faplus"></fa-icon> Add New
+        </button>
+      </div>
+    </div>
+
+
+<div class="books-container">
+  <div class="book-card" *ngFor="let book of books">
+    <!-- Book Cover Image -->
+    <div class="image-container">
+      <img [src]="book.coverImageUrl" 
+           alt="{{ book.title }} cover"
+           (error)="handleImageError($event)"
+           [class.failed]="imageError"
+           #bookImage>
+      <div *ngIf="imageError" class="image-fallback">
+        <img src="assets/images/no-cover.jpg" alt="No cover available">
+      </div>
+    </div>
+
+    <!-- Book Details -->
+    <div class="book-details">
+      <h3 class="book-title">{{ book.title }}</h3>
+      
+      <div class="book-meta">
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Price:</strong> {{ book.price | currency }}</p>
+        <p><strong>Added:</strong> {{ book.uploadDate | date:'mediumDate' }}</p>
+      </div>
+      
+      <div class="book-description" *ngIf="book.description">
+        <h4>Description</h4>
+        <p>{{ book.description  }}</p>
+      </div>
+    </div>
+    <!-- Add these action buttons to your book-card div -->
+<div class="book-actions">
+  <button class="btn btn-edit" (click)="editBook(book.id!)">
+    <fa-icon [icon]="faedit"></fa-icon> Edit
+  </button>
+  <button class="btn btn-delete" (click)="deleteBook(book.id!)">
+    <fa-icon [icon]="fatrash"></fa-icon> Delete
+  </button>
+</div>
+    <!-- PDF Download -->
+    <div class="pdf-link-container">
+      <button (click)="checkPdfLink($event, book)" class="pdf-button">
+        <i class="fas fa-file-pdf"></i> View PDF
+      </button>
+      <div *ngIf="errorMessage" class="pdf-error">
+        {{ errorMessage }}
+        <button (click)="checkPdfLink($event, book)" class="retry-btn">Retry</button>
+      </div>
+    </div>
+  </div>
+</div>

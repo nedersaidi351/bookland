@@ -1,0 +1,14 @@
+<div>
+  <h2>Send Notification</h2>
+  <form (ngSubmit)="sendNotification()">
+    <label>Recipient Email:</label>
+    <input type="email" [(ngModel)]="recipientEmail" name="recipientEmail" required />
+
+    <label>Message:</label>
+    <textarea [(ngModel)]="content" name="content" required></textarea>
+
+    <button type="submit">Send</button>
+  </form>
+
+  <p *ngIf="successMessage">{{ successMessage }}</p>
+</div>

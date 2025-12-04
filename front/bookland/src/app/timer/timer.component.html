@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - BookLands Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <img src="assets/img/favicon.png" rel="icon">
+  <img src="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+
+
+  <!-- Main CSS File -->
+
+  <!-- =======================================================
+  * Template Name: Bootslander
+  * Template URL: https://bootstrapmade.com/bootslander-free-bootstrap-landing-page-template/
+  * Updated: Aug 07 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top"  [ngClass]="{'scrolled': isScrolled}">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="home" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="sitename">Boo<img src="assets/img/b.png">Lands</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu"  >
+        <ul>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box">
+                <i class="bi bi-house-door"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+             <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <i class="bi bi-shop"></i>
+            </div>
+          </div>
+        </li>
+        <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-down" data-aos-delay="200">
+              <div class="icon-box" >
+                <i class="bi bi-stopwatch"></i>
+              </div>
+            </div>
+          </li>
+          <li></li>
+          <li class="hover">
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box">
+              <i class="bi bi-journal-text"></i>
+            </div>
+          </div>
+        </li>
+         
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li ></li>
+          
+          <li class="logo d-flex align-items-center">
+            <div class="dropdown">
+              <button (click)="toggleDropdown()" class="dropbtn">
+                <img src="../../assets/img/FIRas.jpg" alt="Menu" class="dropdown-icon">
+              </button>
+              <div [class.show]="isOpen" class="dropdown-content">
+                
+                <a href="/login" (click)="closeDropdown()">
+                  <fa-icon [icon]="fauser"></fa-icon> Profile ‎ ‎
+                </a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="fabar"></fa-icon>Missions</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="facom"></fa-icon>Message</a>
+                <a href="#" (click)="closeDropdown()"><fa-icon [icon]="faset"></fa-icon>Settings</a>
+                <a href="#" (click)="closeDropdown(); logout()"> <fa-icon [icon]="fadoor"></fa-icon> Logout</a>
+              </div>
+            </div>
+            </li>
+
+        </ul>
+        <i #mobileNavToggle  class="mobile-nav-toggle d-xl-none bi bi-list" class="hover"></i>
+      </nav>
+    </div>
+  </header>
+  <div>
+  </div>
+  <div class="sections-container">
+
+
+
+
+<!-- /Hero Section -->
+<section id="hero" class="hero section dark-background">  
+  <div class="container">
+    <div class="clock-container">
+      <div class="clock-face">
+        <div class="timer-display">
+          <span class="minutes">{{isWorkActive ? workMinutes : breakMinutes}}</span>
+          <span class="colon">:</span>
+          <span class="seconds">{{seconds}}</span>
+        </div>
+        <div class="clock-marks">
+          <div class="mark" *ngFor="let mark of [0,1,2,3,4,5,6,7,8,9,10,11]"></div>
+        </div>
+        <div class="progress-ring">
+          <svg class="progress-circle" viewBox="0 0 100 100">
+            <circle class="progress-circle-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="progress-circle-fill" 
+                    cx="50" cy="50" r="45"
+                    [style.stroke-dashoffset]="calculateProgress()"></circle>
+          </svg>
+        </div>
+      </div>
+    
+      <div class="timer-labels">
+        <span [class.active]="isWorkActive">Work</span>
+        <span [class.active]="!isWorkActive">Break</span>
+      </div>
+    
+      <div class="timer-controls">
+        <button id="start" (click)="startTimer()" *ngIf="!isRunning && !isPaused">Start</button>
+        <button id="pause" (click)="pauseTimer()" *ngIf="isRunning">Pause</button>
+        <button id="resume" (click)="startTimer()" *ngIf="isPaused">Resume</button>
+        <button id="reset" (click)="resetTimer()" *ngIf="isRunning || isPaused">Reset</button>
+      </div>
+    </div>
+
+
+  </div>
+  </section>
+ 
+</div>

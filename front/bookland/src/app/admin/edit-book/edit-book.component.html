@@ -1,0 +1,137 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+<li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"class="active"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Dashboard</div>
+    </div>
+    <div class="header-right">
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-wrapper">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>Edit Book</h1>
+        <ul class="breadcrumb">
+          <li><a routerLink="/book-list">Books</a></li>
+          <li>Edit</li>
+        </ul>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-secondary" routerLink="/book-list">
+          <fa-icon [icon]="faArrowLeft"></fa-icon> Back to List
+        </button>
+      </div>
+    </div>
+
+    <div class="edit-book-container" *ngIf="book; else loading">
+      <form (ngSubmit)="updateBook()" class="book-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" [(ngModel)]="book.title" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" [(ngModel)]="book.author" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="isbn">ISBN</label>
+            <input type="text" id="isbn" name="isbn" [(ngModel)]="book.isbn" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" [(ngModel)]="book.price" step="0.01" min="0" required>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" [(ngModel)]="book.description" rows="4"></textarea>
+        </div>
+
+        <!-- Cover Image Preview -->
+        <div class="form-group" *ngIf="book.coverImageUrl">
+          <label>Current Cover</label>
+          <div class="cover-preview">
+            <img [src]="book.coverImageUrl" alt="Current cover" (error)="handleImageError($event)">
+          </div>
+          <small>Upload new cover image below</small>
+        </div>
+
+        <!-- File Uploads -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="coverImage">Cover Image (optional)</label>
+            <input type="file" id="coverImage" name="coverImage" (change)="onCoverImageChange($event)" accept="image/*">
+          </div>
+          
+          <div class="form-group">
+            <label for="pdfFile">PDF File (optional)</label>
+            <input type="file" id="pdfFile" name="pdfFile" (change)="onPdfFileChange($event)" accept=".pdf">
+          </div>
+        </div>
+
+        <!-- Current PDF Info -->
+        <div class="form-group" *ngIf="book.pdfUrl">
+          <label>Current PDF</label>
+          <div class="pdf-info">
+            <a [href]="book.pdfUrl" target="_blank" class="pdf-link">
+              <i class="fas fa-file-pdf"></i> View Current PDF
+            </a>
+          </div>
+          <small>Upload new PDF file above to replace</small>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" routerLink="/book-list">Cancel</button>
+          <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+            <span *ngIf="!isLoading">Update Book</span>
+            <span *ngIf="isLoading">Updating...</span>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <ng-template #loading>
+      <div class="loading-container">
+        <div *ngIf="isLoading">Loading book details...</div>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </div>
+    </ng-template>
+  </div>
+</div>

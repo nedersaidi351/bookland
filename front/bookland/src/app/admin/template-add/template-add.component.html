@@ -1,0 +1,94 @@
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2><fa-icon [icon]="fashield"></fa-icon> AdminPanel</h2>
+  </div>
+  <ul class="sidebar-menu">
+    
+   <li><a routerLink="/users" ><fa-icon [icon]="fauser"></fa-icon> Users</a></li>
+    <li><a routerLink="/template"class="active"><fa-icon [icon]="famiss"></fa-icon> Missions</a></li>
+    <li><a routerLink="/post"><fa-icon [icon]="fapub"></fa-icon> Posts</a></li>
+    <li><a routerLink="/book-list"><fa-icon [icon]="fabook"></fa-icon> Books</a></li>
+    <li><a routerLink="/notification"><fa-icon [icon]="fanot"></fa-icon> Notification</a></li>
+    <li><a routerLink="/group"><fa-icon [icon]="fagroup"></fa-icon> GroupChat</a></li>
+    <li class="logout-item"><a href="#" (click)="logout()"><fa-icon [icon]="fadoor"></fa-icon> Logout</a></li> 
+  </ul>
+</div>
+
+<!-- Main Content -->
+<!-- Main Content -->
+<div class="main-content">
+  <header class="header">
+    <div class="header-left">
+      <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+      <div class="header-title">Create New Mission Template</div>
+    </div>
+    <div class="header-right">
+      <div class="user-profile">
+        <div class="user-info">
+          <span class="user-name">Nader Saidi</span>
+          <span class="user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Glassmorphism Form Design -->
+  <div class="glass-form-container">
+    <form (ngSubmit)="onSubmit()" class="glass-form">
+      <div class="form-header">
+        <div class="form-icon">
+          <fa-icon [icon]="farock"></fa-icon> 
+        </div>
+        <h2>New Mission Template</h2>
+        <p class="form-subtitle">Configure your mission parameters</p>
+      </div>
+      
+      <div class="form-body">
+        <div class="input-group floating">
+          <input type="text" 
+                 id="title" 
+                 [(ngModel)]="template.title" 
+                 name="title" 
+                 class="glass-input"
+                 placeholder=" "
+                 required>
+          <label for="title">Title <span class="required">*</span></label>
+          <div class="underline"></div>
+        </div>
+        
+        <div class="input-group floating">
+          <textarea id="description" 
+                    [(ngModel)]="template.description" 
+                    name="description" 
+                    class="glass-textarea"
+                    placeholder=" "
+                    rows="3"></textarea>
+          <label for="description">Description</label>
+          <div class="underline"></div>
+        </div>
+        
+        <div class="input-group floating">
+          <input type="text" 
+                 id="groupName" 
+                 [(ngModel)]="template.groupName" 
+                 name="groupName" 
+                 class="glass-input"
+                 placeholder=" ">
+          <label for="groupName">Group Name</label>
+          <div class="underline"></div>
+        </div>
+      </div>
+      
+      <div class="form-footer">
+        <button type="button" class="btn-glass btn-glass-secondary" (click)="goToTemplate()">
+  <fa-icon [icon]="fatimes"></fa-icon> Cancel
+</button>
+
+        <button type="submit" class="btn-glass btn-glass-primary">
+          <fa-icon [icon]="fapaper"></fa-icon>  Create Template
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

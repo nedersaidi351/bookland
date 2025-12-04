@@ -1,0 +1,53 @@
+<!-- my-books.component.html -->
+<div class="my-books-container">
+  <div class="header">
+    <h2 class="title">My Purchased Books</h2>
+    <div class="stats">
+      <span class="stat">
+        <span class="stat-number">{{ purchasedBooks.length }}</span>
+        <span class="stat-label">Books</span>
+      </span>
+      <button class="go-back-btn" (click)="goBack()">
+  <fa-icon [icon]="faarrow"></fa-icon> Go Back
+</button>
+
+    </div>
+  </div>
+  
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading your collection...</p>
+  </div>
+  
+
+  
+  <div *ngIf="!loading && purchasedBooks.length === 0" class="empty-state">
+    <div class="empty-icon">
+      <i class="fas fa-book-open"></i>
+    </div>
+    <h3>Your library is empty</h3>
+    <p>Books you purchase will appear here</p>
+    <button class="browse-btn" routerLink="/market">Browse Books</button>
+  </div>
+  
+  <div class="books-grid" *ngIf="!loading && purchasedBooks.length > 0">
+    <div class="book-card" *ngFor="let book of purchasedBooks">
+      <div class="book-cover">
+        <img [src]="book.coverImageUrl || 'assets/default-book.png'" 
+             [alt]="book.title"
+             (error)="book.coverImageUrl = 'assets/default-book.png'">
+      </div>
+      
+      <div class="book-info">
+        <h3 class="book-title">{{ book.title }}</h3>
+        <p class="book-author">by {{ book.author }}</p>
+        
+        <div class="book-actions">
+          <button class="read-btn" (click)="checkPdfLink($event, book)">
+            <i class="fas fa-book-open"></i> Read
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

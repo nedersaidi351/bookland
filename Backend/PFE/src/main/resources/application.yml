@@ -1,0 +1,39 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    hikari:
+      ssl: false
+    url: jdbc:mysql://localhost:3306/PFE?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: "" # Ensure this is correct or leave it empty if no password is set
+    driver-class-name: com.mysql.cj.jdbc.Driver # Explicitly specify the driver class
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.ssl.SslAutoConfiguration
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+file:
+  upload-dir: ./uploads
+
+application:
+  name: FirstApp
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # a day
+      refresh-token:
+        expiration: 604800000 # 7 days
